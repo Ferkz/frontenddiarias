@@ -1,0 +1,20 @@
+<header>
+  <header class="app-header">
+    <mat-toolbar>
+      <div class="logo">
+        <img src="../../../assets/img/logo.png" width="60px" alt="">
+        <span>Coding Sales</span>
+      </div>
+      <li class="burger" (click)="toggleMenu()">
+        <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
+      </li>
+      <span class="spacer"></span>
+      <div class="menu" [class.is-open]="isMenuOpen">
+        <button mat-button color routerLink="/" class="menu-item"><mat-icon>home</mat-icon>Inicio</button>
+        <button mat-button color class="menu-item" (click)="openDialog()"><mat-icon>settings</mat-icon>Parâmetros</button>
+        <button mat-button color routerLink="/diaria" class="menu-item"><mat-icon>account_circle</mat-icon>Díarias</button>
+        <button mat-button color class="menu-item"><mat-icon>logout</mat-icon>Sair</button>
+      </div>
+      </mat-toolbar>
+  </header>
+</header>

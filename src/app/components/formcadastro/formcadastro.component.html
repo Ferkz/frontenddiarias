@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="title">
+    <mat-icon class="title-icon">calculate</mat-icon>
+    <p>Cálculo de despesas</p>
+  </div>
+<div class="container-form">
+  <div class="grid grid-form-container">
+    <mat-form-field hintLabel="Max 10 characters " appearance="fill">
+      <mat-label for="nome" >Nome do paciente</mat-label>
+      <input matInput [(ngModel)]="paciente.nome"  placeholder="texto"name="nome">
+      <mat-icon>how_to_reg</mat-icon>
+    </mat-form-field>
+    <mat-form-field hintLabel="Max 10 characters" appearance="fill">
+      <mat-label>Número do prontuário</mat-label>
+      <input matInput maxlength="10" placeholder="1010101" [(ngModel)]="paciente.numeroProntuario">
+      <mat-icon>how_to_reg</mat-icon>
+      <mat-hint >/10</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Tipo de Alta</mat-label>
+      <mat-select [(ngModel)]="paciente.tipoAlta" >
+        <mat-option value="option">Obito</mat-option>
+        <mat-option value="option">Alta Hospitalar</mat-option>
+        <mat-option value="option">Evasão</mat-option>
+        <mat-option value="option">Obito</mat-option>
+      </mat-select>
+      <mat-hint >Clique para selecionar</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Data de Entrada</mat-label>
+      <input matInput [matDatepicker]="pickerEntrada" [(ngModel)]="paciente.dataEntrada">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="pickerEntrada">
+        <mat-icon matDatepickerToggleIcon>event</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #pickerEntrada></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Data de Saída</mat-label>
+      <input matInput [matDatepicker]="pickerSaida" [(ngModel)]="paciente.dataSaida">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="pickerSaida">
+        <mat-icon matDatepickerToggleIcon>event</mat-icon>
+      </mat-datepicker-toggle>
+      <mat-datepicker #pickerSaida></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hora de Entrada</mat-label>
+      <input matInput #input maxlength="10" [(ngModel)]="paciente.horaEntrada">
+      <mat-hint >ex: 15:00</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Hora de Saída</mat-label>
+      <input matInput #input maxlength="10" [(ngModel)]="paciente.horaSaida">
+      <mat-hint >ex: 15:00</mat-hint>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="generatePdf()">
+      Calcular
+    </button>
+  </div>
+</div>
+
+</div>
