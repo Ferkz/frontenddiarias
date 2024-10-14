@@ -7,7 +7,7 @@ import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.
 import { FormcadastroComponent } from './components/formcadastro/formcadastro.component';
 
 const routes: Routes = [
-  {path:'home',component:FormcadastroComponent},
+  {path:'',component:FormcadastroComponent},
   {path:'login',component:LoginComponent},
   {path:'params',component: ModalComponent},
   {path:'lista-diarias',component: ListaDiariasComponent}

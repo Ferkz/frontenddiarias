@@ -37,20 +37,12 @@
       <input matInput type="date" formControlName="dataEntrada">
       <div [ngClass]="getClass('dataEntrada')">{{getErrorMessage('dataEntrada')}}</div>
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="pickerEntrada">
-        <mat-icon matDatepickerToggleIcon>event</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #pickerEntrada></mat-datepicker>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Data de Saída</mat-label>
       <input matInput type="date" formControlName="dataSaida">
       <div [ngClass]="getClass('dataSaida')">{{getErrorMessage('dataSaida')}}</div>
       <mat-hint>MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matSuffix [for]="pickerSaida">
-        <mat-icon matDatepickerToggleIcon>event</mat-icon>
-      </mat-datepicker-toggle>
-      <mat-datepicker #pickerSaida></mat-datepicker>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Hora de Entrada</mat-label>

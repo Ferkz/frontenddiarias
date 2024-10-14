@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { PacienteService } from './../../services/paciente.service';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { Paciente } from 'src/app/interfaces/paciente';
 
 @Component({
   selector: 'app-lista-diarias',
@@ -8,7 +10,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./lista-diarias.component.scss']
 })
 export class ListaDiariasComponent implements OnInit {
-  pdfs: any[] = [];
+//  pdfs: any[] = [];
+  dataSource = new MatTableDataSource<Paciente>();
+  displayedColumns: string[] = ['id', 'nome', 'numeroProntuario', 'tipoAlta','visualizar'];
 
   constructor(private pacienteService: PacienteService, private http: HttpClient) { }
 
@@ -17,16 +21,8 @@ export class ListaDiariasComponent implements OnInit {
   }
   loadPdfs() {
     this.pacienteService.getAllDiarias().subscribe((data) => {
-      this.pdfs = data;
+      this.dataSource.data = data
     });
-  }
-  downloadPdf(pdf: any) {
-    const blob = new Blob([pdf.pdfData], { type: 'application/pdf' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `patient_report_${pdf.id}.pdf`;
-    a.click();
   }
   visualizarPdf(diariaid: number){
     this.http.get(`http://localhost:8080/diaria/visualizar/${diariaid}`, { responseType: 'blob' })

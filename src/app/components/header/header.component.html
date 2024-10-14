@@ -10,10 +10,10 @@
       </li>
       <span class="spacer"></span>
       <div class="menu" [class.is-open]="isMenuOpen">
-        <button mat-button color routerLink="/home" class="menu-item"><mat-icon>home</mat-icon>Inicio</button>
-        <button mat-button color class="menu-item" (click)="openDialog()"><mat-icon>settings</mat-icon>Parâmetros</button>
-        <button mat-button color routerLink="/lista-diarias" class="menu-item"><mat-icon>account_circle</mat-icon>Díarias</button>
-        <button mat-button color class="menu-item"><mat-icon>logout</mat-icon>Sair</button>
+        <button mat-button routerLink="/" class="menu-item"><mat-icon>home</mat-icon>Inicio</button>
+        <button mat-button class="menu-item" (click)="openDialog()"><mat-icon>settings</mat-icon>Parâmetros</button>
+        <button mat-button routerLink="/lista-diarias" class="menu-item"><mat-icon>account_circle</mat-icon>Díarias</button>
+        <button mat-button class="menu-item"><mat-icon>logout</mat-icon>Sair</button>
       </div>
       </mat-toolbar>
   </header>

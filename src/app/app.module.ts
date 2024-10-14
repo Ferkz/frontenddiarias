@@ -26,6 +26,8 @@ import { ShowMessageComponent } from './components/show-message/show-message.com
 import { HttpClientModule } from '@angular/common/http';
 import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.component';
 import { DatePipe } from '@angular/common';
+import {MatTableModule} from '@angular/material/table';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { DatePipe } from '@angular/common';
     MatGridListModule,
     MatDialogModule,
     MatSnackBarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTableModule
 
   ],
   providers: [DatePipe],

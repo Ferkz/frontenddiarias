@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Paciente } from '../interfaces/paciente';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,6 @@ export class PacienteService {
       return this.http.post<void>(`${this.apiUrl}/cria-diaria`, paciente);
     }
   getAllDiarias():Observable<any[]>{
-    return this.http.get<any[]>(`${this.apiUrl}/lista-diaria`);
+    return this.http.get<Paciente[]>(`${this.apiUrl}/lista-diaria`);
     }
   }
