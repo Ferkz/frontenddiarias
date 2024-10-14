@@ -3,32 +3,39 @@
     <mat-icon class="title-icon">calculate</mat-icon>
     <p>Cálculo de despesas</p>
   </div>
+  <form [formGroup]="buildForm">
 <div class="container-form">
   <div class="grid grid-form-container">
-    <mat-form-field hintLabel="Max 10 characters " appearance="fill">
+    <div class="form-group">
+    <mat-form-field hintLabel="Max 10 characters " appearance="fill" class="form-nome">
       <mat-label for="nome" >Nome do paciente</mat-label>
-      <input matInput [(ngModel)]="paciente.nome"  placeholder="texto"name="nome">
+      <input matInput placeholder="Nome" id="nome"  formControlName="nome">
+      <div [ngClass]="getClass('nome')">{{getErrorMessage('nome')}}</div>
+      <div *ngIf="buildForm.get('nome')?.errors?.['pattern']"></div>
       <mat-icon>how_to_reg</mat-icon>
     </mat-form-field>
+  </div>
     <mat-form-field hintLabel="Max 10 characters" appearance="fill">
       <mat-label>Número do prontuário</mat-label>
-      <input matInput maxlength="10" placeholder="1010101" [(ngModel)]="paciente.numeroProntuario">
+      <input matInput maxlength="10" placeholder="1010101"  formControlName="numeroProntuario">
+      <div [ngClass]="getClass('numeroProntuario')">{{getErrorMessage('numeroProntuario')}}</div>
+      <div *ngIf="buildForm.get('numeroProntuario')?.errors?.['pattern']"></div>
       <mat-icon>how_to_reg</mat-icon>
-      <mat-hint >/10</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Tipo de Alta</mat-label>
-      <mat-select [(ngModel)]="paciente.tipoAlta" >
-        <mat-option value="option">Obito</mat-option>
-        <mat-option value="option">Alta Hospitalar</mat-option>
-        <mat-option value="option">Evasão</mat-option>
-        <mat-option value="option">Obito</mat-option>
+      <mat-select [ngClass]="getClass('tipoAlta')" formControlName="tipoAlta">{{getErrorMessage('tipoAlta')}}
+        <mat-option value="Obito">Obito</mat-option>
+        <mat-option value="Alta Hospitalar">Alta Hospitalar</mat-option>
+        <mat-option value="Evasão">Evasão</mat-option>
+        <mat-option value="Alta Administrativa">Obito</mat-option>
       </mat-select>
       <mat-hint >Clique para selecionar</mat-hint>
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Data de Entrada</mat-label>
-      <input matInput [matDatepicker]="pickerEntrada" [(ngModel)]="paciente.dataEntrada">
+      <input matInput type="date" formControlName="dataEntrada">
+      <div [ngClass]="getClass('dataEntrada')">{{getErrorMessage('dataEntrada')}}</div>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="pickerEntrada">
         <mat-icon matDatepickerToggleIcon>event</mat-icon>
@@ -37,7 +44,8 @@
     </mat-form-field>
     <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Data de Saída</mat-label>
-      <input matInput [matDatepicker]="pickerSaida" [(ngModel)]="paciente.dataSaida">
+      <input matInput type="date" formControlName="dataSaida">
+      <div [ngClass]="getClass('dataSaida')">{{getErrorMessage('dataSaida')}}</div>
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="pickerSaida">
         <mat-icon matDatepickerToggleIcon>event</mat-icon>
@@ -46,18 +54,21 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Hora de Entrada</mat-label>
-      <input matInput #input maxlength="10" [(ngModel)]="paciente.horaEntrada">
+      <input matInput #input maxlength="10"  formControlName="horaEntrada">
+      <div [ngClass]="getClass('horaEntrada')">{{getErrorMessage('horaEntrada')}}</div>
       <mat-hint >ex: 15:00</mat-hint>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>Hora de Saída</mat-label>
-      <input matInput #input maxlength="10" [(ngModel)]="paciente.horaSaida">
+      <input matInput #input maxlength="10"  formControlName="horaSaida">
+      <div [ngClass]="getClass('horaSaida')">{{getErrorMessage('horaSaida')}}</div>
       <mat-hint >ex: 15:00</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="generatePdf()">
+    <button mat-raised-button color="primary" (click)="onSubmit()"
+    type="submit"[disabled]="buildForm.invalid" >
       Calcular
     </button>
   </div>
 </div>
-
+</form>
 </div>

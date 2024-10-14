@@ -24,6 +24,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ShowMessageComponent } from './components/show-message/show-message.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { HttpClientModule } from '@angular/common/http';
     HeaderComponent,
     FormcadastroComponent,
     ModalComponent,
-    ShowMessageComponent
+    ShowMessageComponent,
+    ListaDiariasComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

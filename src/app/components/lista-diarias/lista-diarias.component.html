@@ -1,0 +1,12 @@
+<div class="container" *ngIf="pdfs.length === 0">
+  Não existe nenhum dado.
+</div>
+
+<div class="container" *ngFor="let pdf of pdfs">
+  <p>ID: {{pdf.id}}</p>
+  <p>Nome:{{pdf.nome}}</p>
+  <p>Número de Prontuário: {{ pdf.numeroProntuario }}</p>
+  <p>{{pdf.tipoAlta}}</p>
+  <button   mat-raised-button color="primary" (click)="visualizarPdf(pdf.id)">Visualizar PDF</button>
+  <hr />
+</div>

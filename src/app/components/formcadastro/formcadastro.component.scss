@@ -18,11 +18,14 @@ $primaryColor: #154c79;
     text-align: center;
   }
 }
+.form-nome{
+  width: 100%;
+}
 .grid{
   display: grid;
 }
 .grid-form-container {
-  grid-template-columns: 5fr 3fr ;
+  grid-template-columns: 8fr 4fr ;
   grid-gap: 5px;
 }
 @media (max-width: $menuBreakpoint) {
