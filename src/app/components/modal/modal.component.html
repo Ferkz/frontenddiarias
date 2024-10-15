@@ -1,19 +1,20 @@
 <h2 mat-dialog-title class="title">Parâmetros<mat-icon class="title-icon">settings</mat-icon></h2>
 <mat-dialog-content class="mat-typography">
   <h3></h3>
-    <form class="modal-form">
+    <form class="modal-form" [formGroup]="buildForm">
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Valor da diária <mat-icon>paid</mat-icon></mat-label>
-        <input matInput placeholder="R$50,00">
+        <input matInput placeholder="R$50,00" formControlName="valor">
+        <div [ngClass]="getClass('valor')">{{getErrorMessage('valor')}}</div>
       </mat-form-field>
       <mat-form-field class="example-full-width" appearance="fill">
         <mat-label>Escolha a cidade <mat-icon>location_city</mat-icon></mat-label>
-        <input matInput placeholder="Porto Velho...">
+        <input matInput placeholder="Porto Velho..." formControlName="cidade">
+        <div [ngClass]="getClass('cidade')">{{getErrorMessage('cidade')}}</div>
       </mat-form-field>
-
     </form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-button  cdkFocusInitial>Salvar</button>
+    <button mat-raised-button color="primary" mat-dialog-close>Cancelar</button>
+    <button mat-raised-button color="primary"  cdkFocusInitial type="submit"[disabled]="buildForm.invalid">Salvar</button>
   </mat-dialog-actions>

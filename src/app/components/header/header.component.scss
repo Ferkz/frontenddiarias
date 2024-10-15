@@ -49,15 +49,14 @@ $primaryColor: #154c79;
       position: absolute;
       top: #{$menuHeight +1 };
       background:$primaryColor ;
-      width: 100%;
+      width: 96%;
     }
   }
   .menu-item {
-    height: $menuHeight;
-    line-height: $menuHeight;
+    margin: 20px;
     text-decoration: none;
     display: flex;
-    text-transform: uppercase;
+
   }
 }
 .btn-calcular{

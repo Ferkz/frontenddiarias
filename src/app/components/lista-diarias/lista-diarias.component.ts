@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { PacienteService } from './../../services/paciente.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Paciente } from 'src/app/interfaces/paciente';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-lista-diarias',
@@ -10,9 +12,11 @@ import { Paciente } from 'src/app/interfaces/paciente';
   styleUrls: ['./lista-diarias.component.scss']
 })
 export class ListaDiariasComponent implements OnInit {
-//  pdfs: any[] = [];
   dataSource = new MatTableDataSource<Paciente>();
   displayedColumns: string[] = ['id', 'nome', 'numeroProntuario', 'tipoAlta','visualizar'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private pacienteService: PacienteService, private http: HttpClient) { }
 
@@ -22,14 +26,17 @@ export class ListaDiariasComponent implements OnInit {
   loadPdfs() {
     this.pacienteService.getAllDiarias().subscribe((data) => {
       this.dataSource.data = data
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
   }
-  visualizarPdf(diariaid: number){
-    this.http.get(`http://localhost:8080/diaria/visualizar/${diariaid}`, { responseType: 'blob' })
-      .subscribe(blob => {
-        const url = window.URL.createObjectURL(blob);
-        window.open(url);
-      });
+  viewPdf(diariaid: number){
+    this.pacienteService.getPdfById(diariaid).subscribe(response =>{
+})
+    this.pacienteService.getPdfById(diariaid).subscribe(response => {
+      const blob = new Blob([response], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    });
   }
-
 }

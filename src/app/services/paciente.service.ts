@@ -17,4 +17,8 @@ export class PacienteService {
   getAllDiarias():Observable<any[]>{
     return this.http.get<Paciente[]>(`${this.apiUrl}/lista-diaria`);
     }
+  getPdfById(id: number): Observable<Blob> {
+      return this.http.get(`${this.apiUrl}/visualizar/${id}`, { responseType: 'blob' });
+    }
   }
+

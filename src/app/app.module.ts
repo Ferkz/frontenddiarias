@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.component';
 import { DatePipe } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -56,8 +57,8 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     MatSnackBarModule,
     HttpClientModule,
-    MatTableModule
-
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

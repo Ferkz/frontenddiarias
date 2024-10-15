@@ -52,7 +52,7 @@ export class FormcadastroComponent implements OnInit {
   }
   getClass(field: string): string {
     const control = this.buildForm.get(field);
-    return control?.errors && control.touched ? ' alert-danger' : '';
+    return control?.errors && control.touched ? 'alert alert-danger' : '';
   }
 
   ngOnInit(): void {
