@@ -8,5 +8,5 @@ export interface Paciente {
     horaSaida: string,
     diasInternado: number,
     valorDiario: string,
-    valorTotal: string
+    valorTotal: string,
 }
