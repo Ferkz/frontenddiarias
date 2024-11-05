@@ -16,5 +16,5 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-raised-button color="primary" mat-dialog-close>Cancelar</button>
-    <button mat-raised-button color="primary"  cdkFocusInitial type="submit"[disabled]="buildForm.invalid">Salvar</button>
+    <button mat-raised-button color="primary"  cdkFocusInitial type="submit"[disabled]="buildForm.invalid" (click)="onSubmit()" mat-dialog-close>Salvar</button>
   </mat-dialog-actions>

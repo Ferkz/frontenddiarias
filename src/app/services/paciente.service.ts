@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,7 +11,7 @@ export class PacienteService {
   private apiUrl = 'http://localhost:8080/diaria';
 
   constructor(private http: HttpClient) { }
-  criarDiaria(
+  insertDiaria(
     paciente:any):Observable<void>{
       return this.http.post<void>(`${this.apiUrl}/cria-diaria`, paciente);
     }
@@ -21,4 +22,5 @@ export class PacienteService {
       return this.http.get(`${this.apiUrl}/visualizar/${id}`, { responseType: 'blob' });
     }
   }
+
 

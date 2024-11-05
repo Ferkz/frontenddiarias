@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { PacienteService } from './../../services/paciente.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Paciente } from 'src/app/interfaces/paciente';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { Paciente } from 'src/app/interfaces/paciente';
 
 @Component({
   selector: 'app-lista-diarias',

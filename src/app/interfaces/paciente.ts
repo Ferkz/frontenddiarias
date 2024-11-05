@@ -1,4 +1,3 @@
-
 export interface Paciente {
     nome: string,
     numeroProntuario: number
@@ -6,5 +5,8 @@ export interface Paciente {
     dataEntrada?: string | null,
     dataSaida?:  string | null,
     horaEntrada:string,
-    horaSaida: string
+    horaSaida: string,
+    diasInternado: number,
+    valorDiario: string,
+    valorTotal: string
 }

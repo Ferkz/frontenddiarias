@@ -1,10 +1,10 @@
-import { Paciente } from './../../interfaces/paciente';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ShowMessageComponent } from '../show-message/show-message.component';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PacienteService } from 'src/app/services/paciente.service';
+import { Paciente } from 'src/app/interfaces/paciente';
 
 @Component({
   selector: 'app-formcadastro',
@@ -106,23 +106,43 @@ export class FormcadastroComponent implements OnInit {
       ],
     });
   }
-  parseDate(data:any){
-    const [ano, mes, dia] = data.split('-')
-    const newDate = new Date(ano,mes-1, dia)
-    return newDate.getTime()
+  parseDateToString(data: any) {
+    const [ano, mes, dia] = data.split('-');
+    const dataFormat = `${dia}/${mes}/${ano}`;
+    return dataFormat;
   }
-  parseDateToString (data:any){
-    const [ano, mes, dia] = data.split('-')
-    const dataFormat = `${dia}/${mes}/${ano}`
-    return dataFormat
+  dateToTime(date: any) {
+    const [ano, mm, dd] = date.split('-');
+    const newDate = new Date(ano, mm - 1, dd);
+    return newDate.getTime();
   }
-
+  formataMoeda(days: number) {
+    const parametros = JSON.parse(localStorage.getItem('parametros') || '{}');
+    const valorDiario = parametros.valor.replace('.', '').replace(',', '.');
+    console.log('valor aqui ' + valorDiario);
+    return valorDiario * days;
+  }
+  formataValor(valor: any) {
+    const valorFormatado = Intl.NumberFormat('pt-br', {
+      style: 'currency',
+      currency: 'BRL',
+    }).format(valor);
+    return valorFormatado;
+  }
   onSubmit() {
     if (this.buildForm.valid) {
       const dataEntradaStr = this.buildForm.get('dataEntrada')?.value;
       const dataSaidaStr = this.buildForm.get('dataSaida')?.value;
-      const dataEntrada= this.parseDateToString(dataEntradaStr)
-      const dataSaida = this.parseDateToString(dataSaidaStr)
+      const dataEntrada = this.parseDateToString(dataEntradaStr);
+      const dataSaida = this.parseDateToString(dataSaidaStr);
+      const time =
+        (this.dateToTime(dataSaidaStr) - this.dateToTime(dataEntradaStr)) /
+        1000;
+      const daysToSecond = 24 * 60 * 60;
+      const days = Math.floor(time / daysToSecond);
+      const pegaValor = JSON.parse(localStorage.getItem('parametros') || '{}');
+      const valorFormato = pegaValor.valor.replace('.', '').replace(',', '.');
+
       this.cadastroPaciente = {
         nome: this.buildForm.get('nome')?.value,
         numeroProntuario: this.buildForm.get('numeroProntuario')?.value,
@@ -131,24 +151,22 @@ export class FormcadastroComponent implements OnInit {
         dataSaida: dataSaida,
         horaEntrada: this.buildForm.get('horaEntrada')?.value,
         horaSaida: this.buildForm.get('horaSaida')?.value,
-      }
+        diasInternado: days,
+        valorDiario: this.formataValor(valorFormato),
+        valorTotal: this.formataValor(this.formataMoeda(days))
+      };
       console.log(this.cadastroPaciente);
       this.generatePdf(this.cadastroPaciente);
     }
   }
   generatePdf(paciente: any) {
-    const data = paciente;
-    this.http
-      .post('http://localhost:8080/diaria/cria-diaria', data, {
-        responseType: 'blob',
-      })
-      .subscribe({
-        next: (response) => {
-          this.showMessage('Diária calculada com sucesso!', 'success');
-        },
-        error: () => {
-          this.showMessage('Falha ao calcular diária!', 'error');
-        },
-      });
+    this.pacienteService.insertDiaria(paciente).subscribe({
+      next: (response) => {
+        this.showMessage('Diária calculada com sucesso!', 'success');
+      },
+      error: () => {
+        this.showMessage('Falha ao calcular diária!', 'error');
+      },
+    });
   }
 }

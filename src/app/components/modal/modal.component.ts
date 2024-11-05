@@ -36,20 +36,32 @@ export class ModalComponent implements OnInit {
     return control?.errors && control.touched ? ' alert-danger' : '';
   }
   ngOnInit(): void {
+    const parametros = JSON.parse(localStorage.getItem('parametros') || '{}');
     this.buildForm = this.fb.group({
-      valor: ['',Validators.compose([
+      valor: [parametros.valor,Validators.compose([
         Validators.required,
         Validators.minLength(2),
         Validators.pattern(/^[1-9]\d{0,2}(\.\d{3})*,\d{2}$/)
       ]),
     ],
-    cidade: ['', Validators.compose([
+    cidade: [parametros.cidade, Validators.compose([
       Validators.required,
       Validators.minLength(2),
       Validators.pattern( /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?: [A-Za-zÀ-ÖØ-öø-ÿ]+)*(-[A-Za-zÀ-ÖØ-öø-ÿ]+)?$/)
     ])]
 
     })
+  }
+  onSubmit(){
+    this.cadastroParametros = {
+      valor: this.buildForm.get('valor')?.value,
+      cidade: this.buildForm.get('cidade')?.value
+    }
+    localStorage.setItem('parametros', JSON.stringify(this.cadastroParametros))
+    const getParametros = localStorage.getItem('parametros')
+    console.log(getParametros);
+    this
+
   }
 
 }
