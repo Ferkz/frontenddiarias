@@ -139,7 +139,11 @@ export class FormcadastroComponent implements OnInit {
         (this.dateToTime(dataSaidaStr) - this.dateToTime(dataEntradaStr)) /
         1000;
       const daysToSecond = 24 * 60 * 60;
-      const days = Math.floor(time / daysToSecond);
+      let days = Math.floor(time / daysToSecond);
+      const pegaTipoAlta = this.buildForm.get('tipoAlta')?.value
+      if (pegaTipoAlta === "Óbito" || pegaTipoAlta === "Transferência") {
+        days += 1;
+    }
       const pegaValor = JSON.parse(localStorage.getItem('parametros') || '{}');
       const valorFormato = pegaValor.valor.replace('.', '').replace(',', '.');
 
