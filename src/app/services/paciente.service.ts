@@ -8,7 +8,7 @@ import { Paciente } from '../interfaces/paciente';
   providedIn: 'root'
 })
 export class PacienteService {
-  private apiUrl = 'http://localhost:8080/diaria';
+  private apiUrl = 'http://10.0.0.71:8080/diaria';
 
   constructor(private http: HttpClient) { }
   insertDiaria(

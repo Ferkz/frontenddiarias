@@ -1,3 +1,4 @@
+$primaryColor: #154c79;
 .divider:after,
 .divider:before {
 content: "";
@@ -7,6 +8,11 @@ background: #eee;
 }
 .h-custom {
 height: calc(100% - 73px);
+}
+.footer{
+  background-color: $primaryColor;
+  height: 3.5rem;
+  text-align: center;
 }
 @media (max-width: 450px) {
 .h-custom {
