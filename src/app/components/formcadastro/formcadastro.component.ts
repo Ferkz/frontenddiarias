@@ -12,7 +12,7 @@ import { Paciente } from 'src/app/interfaces/paciente';
   styleUrls: ['./formcadastro.component.scss'],
 })
 export class FormcadastroComponent implements OnInit {
-  durationInSeconds = 5;
+  durationInSeconds = 10;
   buildForm!: FormGroup;
   cadastroPaciente!: Paciente;
 
@@ -22,9 +22,9 @@ export class FormcadastroComponent implements OnInit {
     private fb: FormBuilder,
     private pacienteService: PacienteService
   ) {}
-  showMessage(message: string, type: 'success' | 'error') {
+  showMessage(message: string, type: 'success' | 'error', id: any) {
     this._snackBar.openFromComponent(ShowMessageComponent, {
-      data: { message, type },
+      data: { message, type, id },
       duration: this.durationInSeconds * 1000,
     });
   }
@@ -140,13 +140,17 @@ export class FormcadastroComponent implements OnInit {
         1000;
       const daysToSecond = 24 * 60 * 60;
       let days = Math.floor(time / daysToSecond);
-      const pegaTipoAlta = this.buildForm.get('tipoAlta')?.value
-      if (pegaTipoAlta === "Óbito" || pegaTipoAlta === "Transferência") {
+      const pegaTipoAlta = this.buildForm.get('tipoAlta')?.value;
+      if (pegaTipoAlta === 'Óbito' || pegaTipoAlta === 'Transferência') {
         days += 1;
-    }
+      }
       const pegaValor = JSON.parse(localStorage.getItem('parametros') || '{}');
-      const valorFormato = pegaValor.valor.replace('.', '').replace(',', '.');
-
+      var valorFormatado = pegaValor
+      try {
+        valorFormatado = pegaValor.valor.replace('.', '').replace(',', '.');
+      } catch (error) {
+        return this.showMessage('O valor da diária não pode está vazio.','error', null)
+      }
       this.cadastroPaciente = {
         nome: this.buildForm.get('nome')?.value,
         numeroProntuario: this.buildForm.get('numeroProntuario')?.value,
@@ -156,8 +160,8 @@ export class FormcadastroComponent implements OnInit {
         horaEntrada: this.buildForm.get('horaEntrada')?.value,
         horaSaida: this.buildForm.get('horaSaida')?.value,
         diasInternado: days,
-        valorDiario: this.formataValor(valorFormato),
-        valorTotal: this.formataValor(this.formataMoeda(days))
+        valorDiario: this.formataValor(valorFormatado),
+        valorTotal: this.formataValor(this.formataMoeda(days)),
       };
       console.log(this.cadastroPaciente);
       this.generatePdf(this.cadastroPaciente);
@@ -165,11 +169,14 @@ export class FormcadastroComponent implements OnInit {
   }
   generatePdf(paciente: any) {
     this.pacienteService.insertDiaria(paciente).subscribe({
-      next: (response) => {
-        this.showMessage('Diária calculada com sucesso!', 'success');
+      next: () => {
+        this.pacienteService.getLastId().subscribe((id) => {
+          console.log(`ID da diariia ${id}`);
+          this.showMessage('Diária calculada com sucesso!', 'success', id);
+        });
       },
       error: () => {
-        this.showMessage('Falha ao calcular diária!', 'error');
+        this.showMessage('Falha ao calcular diária!', 'error', null);
       },
     });
   }

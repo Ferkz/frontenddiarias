@@ -55,6 +55,23 @@
       <div [ngClass]="getClass('horaSaida')">{{getErrorMessage('horaSaida')}}</div>
       <mat-hint >ex: 15:00</mat-hint>
     </mat-form-field>
+    <mat-form-field appearance="fill">
+    <mat-label>Competência</mat-label>
+    <mat-select>
+      <mat-option value="Janeiro">Janeiro</mat-option>
+      <mat-option value="Fevereiro">Fevereiro</mat-option>
+      <mat-option value="Março">Março</mat-option>
+      <mat-option value="Abril">Abril</mat-option>
+      <mat-option value="Maio">Maio</mat-option>
+      <mat-option value="Junho">Junho</mat-option>
+      <mat-option value="Julho">Julho</mat-option>
+      <mat-option value="Agosto">Agosto</mat-option>
+      <mat-option value="Setembro">Setembro</mat-option>
+      <mat-option value="Outubro">Outubro</mat-option>
+      <mat-option value="Novembro">Novembro</mat-option>
+      <mat-option value="Dezembro">Dezembro</mat-option>
+    </mat-select>
+  </mat-form-field>
     <button mat-raised-button color="primary" (click)="onSubmit()"
     type="submit"[disabled]="buildForm.invalid" >
       Calcular

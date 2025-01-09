@@ -10,6 +10,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FormcadastroComponent } from './components/formcadastro/formcadastro.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ModalComponent } from './components/modal/modal.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -28,6 +29,8 @@ import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.
 import { DatePipe } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
+
 
 
 @NgModule({
@@ -37,7 +40,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     FormcadastroComponent,
     ModalComponent,
     ShowMessageComponent,
-    ListaDiariasComponent
+    ListaDiariasComponent,
+    FooterComponent,
+    FilterByNamePipe
   ],
   imports: [
     BrowserModule,

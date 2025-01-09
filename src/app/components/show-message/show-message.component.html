@@ -1,1 +1,4 @@
 <span class="message">{{ data.message }}</span>
+<button *ngIf="data.id" mat-raised-button color="primary" class="btn-print" (click)="imprimirDiaria()">
+  Imprimir
+</button>

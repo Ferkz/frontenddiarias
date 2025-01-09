@@ -1,0 +1,17 @@
+$primaryColor: #154c79;
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+.footer{
+  background-color: $primaryColor;
+  height: 3.5rem;
+  text-align: center;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  margin-top: 10px;
+}
