@@ -29,6 +29,9 @@ import { ListaDiariasComponent } from './components/lista-diarias/lista-diarias.
 import { DatePipe } from '@angular/common';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+
 import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
 
 
@@ -63,7 +66,9 @@ import { FilterByNamePipe } from './pipes/filter-by-name.pipe';
     MatSnackBarModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

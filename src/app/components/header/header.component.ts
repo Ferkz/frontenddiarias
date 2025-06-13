@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
@@ -7,22 +8,20 @@ import { ModalComponent } from '../modal/modal.component';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
+export class HeaderComponent {
 
-export class HeaderComponent implements OnInit {
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void {
-  }
-  openDialog(){
+
+  openDialog(): void {
     this.dialog.open(ModalComponent)
-  }
-  isMenuOpen = false;
 
-  toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
   }
-
 }
+
 
 
 

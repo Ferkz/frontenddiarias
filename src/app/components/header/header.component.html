@@ -1,22 +1,43 @@
-<header>
-  <header class="app-header">
-    <mat-toolbar>
-      <div class="logo">
-        <a href="https://ferkz.github.io/luisfernandomonteiro/">
-        <img src="../../../assets/img/logo.png" width="60px" alt="logo coding sales">
+<mat-drawer-container class="app-container" autosize>
+
+  <mat-drawer #drawer class="app-sidenav" mode="over" opened="true">
+    <div class="logo-container">
+        <img src="../../../assets/img/logo.png" alt="Logo Coding Sales">
+        <span class="logo-name">Coding Sales</span>
+    </div>
+    <mat-nav-list class="menu-items">
+      <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+        <mat-icon matListItemIcon>home</mat-icon>
+        <span matListItemTitle>Início</span>
       </a>
-              <span class="logo-name">Coding Sales</span>
-      </div>
-      <li class="burger" (click)="toggleMenu()">
-        <i class="material-icons">{{ isMenuOpen ? "close" : "menu" }}</i>
-      </li>
-      <span class="spacer"></span>
-      <div class="menu" [class.is-open]="isMenuOpen">
-        <button mat-raised-button routerLink="/" class="menu-item"><mat-icon>home</mat-icon>Inicio</button>
-        <button mat-raised-button class="menu-item" (click)="openDialog()"><mat-icon>settings</mat-icon>Parâmetros</button>
-        <button mat-raised-button routerLink="/lista-diarias" class="menu-item"><mat-icon>account_circle</mat-icon>Díarias</button>
-        <button mat-raised-button class="menu-item" routerLink="/login"><mat-icon>logout</mat-icon>Sair</button>
-      </div>
-      </mat-toolbar>
-  </header>
-</header>
+      <a mat-list-item (click)="openDialog()">
+        <mat-icon matListItemIcon>settings</mat-icon>
+        <span matListItemTitle>Parâmetros</span>
+      </a>
+      <a mat-list-item routerLink="/lista-diarias" routerLinkActive="active-link">
+        <mat-icon matListItemIcon>description</mat-icon>
+        <span matListItemTitle>Diárias</span>
+      </a>
+
+      <mat-divider></mat-divider>
+
+      <a mat-list-item >
+        <mat-icon matListItemIcon>logout</mat-icon>
+        <span matListItemTitle>Sair</span>
+      </a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <mat-drawer-content class="app-sidenav-content">
+    <mat-toolbar color="primary" class="app-toolbar">
+      <button mat-icon-button (click)="drawer.toggle()" aria-label="Toggle Sidenav">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Menu</span>
+    </mat-toolbar>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>

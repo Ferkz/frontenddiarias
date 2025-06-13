@@ -1,64 +1,73 @@
-$menuHeight: 60px;
-$menuBreakpoint: 768px;
-$primaryColor: #154c79;
+// Garante que o container ocupe toda a altura da tela
+.app-container {
+  height: 100vh;
+}
 
-.container{
-  margin: 20px;
-}
-#sus-logo{
-  padding-right: auto;
-}
-.app-header{
-  button{
-    margin: 0 16px;
-  }
-  .spacer {
-    flex: 1 1 auto;
-  }
-  .logo{
-    width: 60px;
-    height: 60px;
-    text-decoration: none;
-    @media (max-width: $menuBreakpoint) {
-      display: none;
-    }
-  }
-  .mat-toolbar{
-    background-color:$primaryColor ;
-    color: white;
-  }
-}
-.burger {
-  padding: 0 10px;
-  display: none;
-  cursor: pointer;
-  i {
-    color: #fff;
-    line-height: $menuHeight;
-  }
-  @media (max-width: $menuBreakpoint) {
-    display: block;
-  }
-}
-.menu {
-  display: flex;
-  align-items: center;
-  @media (max-width: $menuBreakpoint) {
-    display: none;
-    &.is-open {
-      display: block;
-      position: absolute;
-      top: #{$menuHeight +1 };
-      background:$primaryColor ;
-      width: 96%;
-    }
-}
-  .menu-item {
-    margin: 20px;
+// Estilo do menu lateral
+.app-sidenav {
+  width: 240px;
+  background-color: #f4f4f4;
+  border-right: 1px solid rgba(0, 0, 0, 0.12);
+
+  .logo-container {
     display: flex;
+    align-items: center;
+    padding: 16px;
+    gap: 10px;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-name {
+      font-size: 1.2em;
+      font-weight: 500;
+    }
+  }
+
+  .menu-items {
+    padding-top: 10px;
+  }
+
+  // Estilo para o link ativo no menu
+  .active-link {
+    background-color: rgba(63, 81, 181, 0.1); /* Cor primária com transparência */
+    color: #3f51b5; /* Cor primária */
+
+    mat-icon {
+      color: #3f51b5;
+    }
   }
 }
-.btn-calcular{
-  width: 10px;
+
+// Estilo para o conteúdo principal
+.app-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
+// Barra de ferramentas superior
+.app-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+// Wrapper para o conteúdo da rota, com padding
+.content-wrapper {
+  padding: 24px;
+  flex-grow: 1; // Faz o conteúdo crescer para ocupar o espaço disponível
+  overflow-y: auto; // Adiciona rolagem se o conteúdo for maior que a tela
+}
+
+// Media query para esconder o menu lateral por padrão em telas pequenas
+@media (max-width: 768px) {
+  .app-sidenav {
+    // Por padrão, o menu virá fechado em telas mobile.
+    // Você pode remover o `opened="true"` do HTML para que ele comece fechado.
+  }
+}
