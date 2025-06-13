@@ -22,16 +22,19 @@ export class FormcadastroComponent implements OnInit {
     private fb: FormBuilder,
     private pacienteService: PacienteService
   ) {}
+
   showMessage(message: string, type: 'success' | 'error', id: any) {
     this._snackBar.openFromComponent(ShowMessageComponent, {
       data: { message, type, id },
       duration: this.durationInSeconds * 1000,
     });
   }
+
   hasError(field: string, error: string): boolean {
     const control = this.buildForm.get(field);
     return !!(control?.hasError(error) && control.touched);
   }
+
   getErrorMessage(field: string): string | null {
     if (this.hasError(field, 'required')) {
       return 'Campo obrigatório.';
@@ -50,6 +53,7 @@ export class FormcadastroComponent implements OnInit {
     }
     return null;
   }
+
   getClass(field: string): string {
     const control = this.buildForm.get(field);
     return control?.errors && control.touched ? 'alert alert-danger' : '';
@@ -77,7 +81,14 @@ export class FormcadastroComponent implements OnInit {
           Validators.pattern(/^\d{1,13}$/),
         ]),
       ],
-      tipoAlta: ['', Validators.compose([Validators.minLength(5)])],
+      numeroAih: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern(/^\d+$/)
+        ])
+      ],
+      tipoAlta: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       dataEntrada: [
         '',
         Validators.compose([Validators.required, Validators.minLength(10)]),
@@ -104,24 +115,28 @@ export class FormcadastroComponent implements OnInit {
           Validators.pattern(/^([01]\d|2[0-3]):([0-5]\d)$/),
         ]),
       ],
+      competencia: ['', Validators.required]
     });
   }
+
   parseDateToString(data: any) {
     const [ano, mes, dia] = data.split('-');
     const dataFormat = `${dia}/${mes}/${ano}`;
     return dataFormat;
   }
+
   dateToTime(date: any) {
     const [ano, mm, dd] = date.split('-');
     const newDate = new Date(ano, mm - 1, dd);
     return newDate.getTime();
   }
+
   formataMoeda(days: number) {
     const parametros = JSON.parse(localStorage.getItem('parametros') || '{}');
     const valorDiario = parametros.valor.replace('.', '').replace(',', '.');
-    console.log('valor aqui ' + valorDiario);
     return valorDiario * days;
   }
+
   formataValor(valor: any) {
     const valorFormatado = Intl.NumberFormat('pt-br', {
       style: 'currency',
@@ -129,6 +144,7 @@ export class FormcadastroComponent implements OnInit {
     }).format(valor);
     return valorFormatado;
   }
+
   onSubmit() {
     if (this.buildForm.valid) {
       const dataEntradaStr = this.buildForm.get('dataEntrada')?.value;
@@ -145,15 +161,17 @@ export class FormcadastroComponent implements OnInit {
         days += 1;
       }
       const pegaValor = JSON.parse(localStorage.getItem('parametros') || '{}');
-      var valorFormatado = pegaValor
+      var valorFormatado = pegaValor;
       try {
         valorFormatado = pegaValor.valor.replace('.', '').replace(',', '.');
       } catch (error) {
         return this.showMessage('O valor da diária não pode está vazio.','error', null)
       }
+
       this.cadastroPaciente = {
         nome: this.buildForm.get('nome')?.value,
         numeroProntuario: this.buildForm.get('numeroProntuario')?.value,
+        numeroAih: this.buildForm.get('numeroAih')?.value,
         tipoAlta: this.buildForm.get('tipoAlta')?.value,
         dataEntrada: dataEntrada,
         dataSaida: dataSaida,
@@ -162,11 +180,14 @@ export class FormcadastroComponent implements OnInit {
         diasInternado: days,
         valorDiario: this.formataValor(valorFormatado),
         valorTotal: this.formataValor(this.formataMoeda(days)),
+        competencia: this.buildForm.get('competencia')?.value,
       };
+
       console.log(this.cadastroPaciente);
       this.generatePdf(this.cadastroPaciente);
     }
   }
+
   generatePdf(paciente: any) {
     this.pacienteService.insertDiaria(paciente).subscribe({
       next: () => {

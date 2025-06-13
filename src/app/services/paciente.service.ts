@@ -27,4 +27,10 @@ export class PacienteService {
   getLastId(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}/pegarid`);
   }
+  downloadXlsxByCompetencia(competencia: string): Observable<Blob> {
+  const url = `${this.apiUrl}/download-xlsx?competencia=${competencia}`;
+  return this.http.get(url, {
+    responseType: 'blob'
+  });
+}
 }

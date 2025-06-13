@@ -3,80 +3,99 @@
     <mat-icon class="title-icon">calculate</mat-icon>
     <p>Cálculo de despesas</p>
   </div>
+
   <form [formGroup]="buildForm">
-<div class="container-form">
-  <div class="grid grid-form-container">
-    <div class="form-group">
-    <mat-form-field appearance="fill" class="form-nome">
-      <mat-label for="nome" >Nome do paciente</mat-label>
-      <input matInput placeholder="Nome" id="nome"  formControlName="nome">
-      <div [ngClass]="getClass('nome')">{{getErrorMessage('nome')}}</div>
-      <mat-icon>how_to_reg</mat-icon>
-    </mat-form-field>
-  </div>
-    <mat-form-field appearance="fill">
-      <mat-label>Número do prontuário</mat-label>
-      <input matInput maxlength="10" placeholder="1010101"  formControlName="numeroProntuario">
-      <div [ngClass]="getClass('numeroProntuario')">{{getErrorMessage('numeroProntuario')}}</div>
-      <mat-icon>how_to_reg</mat-icon>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Tipo de Alta</mat-label>
-      <mat-select [ngClass]="getClass('tipoAlta')" formControlName="tipoAlta">{{getErrorMessage('tipoAlta')}}
-        <mat-option value="Óbito">Óbito</mat-option>
-        <mat-option value="Alta Hospitalar">Alta Hospitalar</mat-option>
-        <mat-option value="Evasão">Evasão</mat-option>
-        <mat-option value="Alta Administrativa">Alta Administrativa</mat-option>
-        <mat-option value="Transferência">Transferência</mat-option>
-        <mat-option value="Permanencia para doação de orgãos">Permanencia para doação de orgãos</mat-option>
-        <mat-option value="A pedido">A pedido</mat-option>
-      </mat-select>
-      <mat-hint >Clique para selecionar</mat-hint>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Data de Entrada</mat-label>
-      <input matInput type="date" formControlName="dataEntrada">
-      <div [ngClass]="getClass('dataEntrada')">{{getErrorMessage('dataEntrada')}}</div>
-    </mat-form-field>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Data de Saída</mat-label>
-      <input matInput type="date" formControlName="dataSaida">
-      <div [ngClass]="getClass('dataSaida')">{{getErrorMessage('dataSaida')}}</div>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Hora de Entrada</mat-label>
-      <input matInput #input maxlength="10"  formControlName="horaEntrada">
-      <div [ngClass]="getClass('horaEntrada')">{{getErrorMessage('horaEntrada')}}</div>
-      <mat-hint >ex: 15:00</mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Hora de Saída</mat-label>
-      <input matInput #input maxlength="10"  formControlName="horaSaida">
-      <div [ngClass]="getClass('horaSaida')">{{getErrorMessage('horaSaida')}}</div>
-      <mat-hint >ex: 15:00</mat-hint>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-    <mat-label>Competência</mat-label>
-    <mat-select>
-      <mat-option value="Janeiro">Janeiro</mat-option>
-      <mat-option value="Fevereiro">Fevereiro</mat-option>
-      <mat-option value="Março">Março</mat-option>
-      <mat-option value="Abril">Abril</mat-option>
-      <mat-option value="Maio">Maio</mat-option>
-      <mat-option value="Junho">Junho</mat-option>
-      <mat-option value="Julho">Julho</mat-option>
-      <mat-option value="Agosto">Agosto</mat-option>
-      <mat-option value="Setembro">Setembro</mat-option>
-      <mat-option value="Outubro">Outubro</mat-option>
-      <mat-option value="Novembro">Novembro</mat-option>
-      <mat-option value="Dezembro">Dezembro</mat-option>
-    </mat-select>
-  </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onSubmit()"
-    type="submit"[disabled]="buildForm.invalid" >
-      Calcular
-    </button>
-  </div>
-</div>
-</form>
+    <div class="container-form">
+      <div class="grid grid-form-container">
+
+        <div class="form-group">
+          <mat-form-field appearance="fill" class="form-nome">
+            <mat-label for="nome">Nome do paciente</mat-label>
+            <input matInput placeholder="Nome" id="nome" formControlName="nome">
+            <div [ngClass]="getClass('nome')">{{getErrorMessage('nome')}}</div>
+            <mat-icon>how_to_reg</mat-icon>
+          </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Número do prontuário</mat-label>
+          <input matInput maxlength="10" placeholder="1010101" formControlName="numeroProntuario">
+          <div [ngClass]="getClass('numeroProntuario')">{{getErrorMessage('numeroProntuario')}}</div>
+          <mat-icon>how_to_reg</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Nº DA AIH</mat-label>
+          <input matInput placeholder="Apenas números" formControlName="numeroAih">
+          <div [ngClass]="getClass('numeroAih')">{{getErrorMessage('numeroAih')}}</div>
+          <mat-hint>Número da AIH</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de Alta</mat-label>
+          <mat-select formControlName="tipoAlta">
+            <mat-option value="Óbito">Óbito</mat-option>
+            <mat-option value="Alta Hospitalar">Alta Hospitalar</mat-option>
+            <mat-option value="Evasão">Evasão</mat-option>
+            <mat-option value="Alta Administrativa">Alta Administrativa</mat-option>
+            <mat-option value="Transferência">Transferência</mat-option>
+            <mat-option value="Permanencia para doação de orgãos">Permanencia para doação de orgãos</mat-option>
+            <mat-option value="A pedido">A pedido</mat-option>
+          </mat-select>
+          <div [ngClass]="getClass('tipoAlta')">{{getErrorMessage('tipoAlta')}}</div>
+          <mat-hint>Clique para selecionar</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Data de Entrada</mat-label>
+          <input matInput type="date" formControlName="dataEntrada">
+          <div [ngClass]="getClass('dataEntrada')">{{getErrorMessage('dataEntrada')}}</div>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Data de Saída</mat-label>
+          <input matInput type="date" formControlName="dataSaida">
+          <div [ngClass]="getClass('dataSaida')">{{getErrorMessage('dataSaida')}}</div>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Entrada</mat-label>
+          <input matInput maxlength="10" formControlName="horaEntrada">
+          <div [ngClass]="getClass('horaEntrada')">{{getErrorMessage('horaEntrada')}}</div>
+          <mat-hint>ex: 15:00</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Hora de Saída</mat-label>
+          <input matInput maxlength="10" formControlName="horaSaida">
+          <div [ngClass]="getClass('horaSaida')">{{getErrorMessage('horaSaida')}}</div>
+          <mat-hint>ex: 15:00</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Competência</mat-label>
+          <mat-select formControlName="competencia">
+            <mat-option value="Janeiro">Janeiro</mat-option>
+            <mat-option value="Fevereiro">Fevereiro</mat-option>
+            <mat-option value="Março">Março</mat-option>
+            <mat-option value="Abril">Abril</mat-option>
+            <mat-option value="Maio">Maio</mat-option>
+            <mat-option value="Junho">Junho</mat-option>
+            <mat-option value="Julho">Julho</mat-option>
+            <mat-option value="Agosto">Agosto</mat-option>
+            <mat-option value="Setembro">Setembro</mat-option>
+            <mat-option value="Outubro">Outubro</mat-option>
+            <mat-option value="Novembro">Novembro</mat-option>
+            <mat-option value="Dezembro">Dezembro</mat-option>
+          </mat-select>
+          <div [ngClass]="getClass('competencia')">{{getErrorMessage('competencia')}}</div>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="onSubmit()" type="submit" [disabled]="buildForm.invalid">
+          Calcular
+        </button>
+
+      </div>
+    </div>
+  </form>
 </div>
