@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class PacienteService {
-  private apiUrl =environment.apiUrl
+  private apiUrl =`${environment.apiUrl}/diaria`
 
   constructor(private http: HttpClient) {}
   insertDiaria(paciente: any): Observable<any> {
